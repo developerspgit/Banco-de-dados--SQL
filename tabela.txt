@@ -1,0 +1,41 @@
+CREATE TABLE sucesso (
+cd_cliente  number (4),
+nm_cliente varchar2 (50),
+ds_endereco varchar2 (70),
+cd_municipio number (5),
+sg_estado char (2),
+nr_cep  varchar2 (8),
+nr_ddd  number (3),
+nr_fone  number(7),
+ie_sexo       char(1),
+constraint sucesso_cd_cliente_pk primary key (cd_cliente),
+constraint sucesso_sg_estado_fk foreign key (sg_estado)references estado(sg_estado) 
+)
+
+CREATE TABLE historico(
+cd_cliente number(4),
+dt_compra date,
+vl_compra number(12,2),
+constraint historico_pk primary key (cd_cliente,dt_compra)
+
+
+
+)
+CREATE TABLE estado(
+sg_estado char(1),
+nm_estado varchar(35),
+constraint estado_nm_estado_un unique (nm_estado),
+constraint estado_sg_estado_pk primary key (sg_estado)
+
+
+)
+ALTER TABLE sucesso
+ADD (ie_fisica_juridica char(1))
+
+ALTER TABLE sucesso
+MODIFY (nm_cliente varchar2(65))
+
+ALTER TABLE sucesso
+drop constraint cliente_ie_fisica_juridica_ck
+
+drop table sucesso
